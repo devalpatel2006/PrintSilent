@@ -10,7 +10,7 @@ class ExternalApiController extends Controller
     public function psv1(Request $request)
     {
          $postData = $request->all(); // or customize the payload
-         $response = Http::get('http://localhost:8781/shippingprint', $postData);
+         $response = Http::get('http://127.0.0.1:8781/shippingprint', $postData);
         return response()->json([
             'status' => $response->successful(),
             'queryparam' => $postData
