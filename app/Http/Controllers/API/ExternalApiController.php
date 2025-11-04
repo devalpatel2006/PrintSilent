@@ -9,11 +9,10 @@ class ExternalApiController extends Controller
 {
     public function psv1(Request $request)
     {
-         $postData = $request->all(); // or customize the payload
-         $response = Http::get('http://127.0.0.1:8781/shippingprint', $postData);
-        return response()->json([
-            'status' => $response->successful(),
-            'queryparam' => $postData
-        ]);
+         //$postData = $request->all(); // or customize the payload
+         //$response = Http::get('http://127.0.0.1:8781/shippingprint', $postData);
+         $queryParams = http_build_query($request->all()); // build query string 
+         $url = "http://127.0.0.1:8781/shippingprint?$queryParams";
+         return redirect()->away($url); // redirect browser to Dart API
     }
 }
