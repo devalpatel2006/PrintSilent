@@ -24,7 +24,7 @@
         });
 
         // Call the GET API
-        fetch(`http://127.0.0.1:8781/shippingprint?${params.toString()}`, {
+        fetch(`http://localhost:8781/shippingprint?${params.toString()}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
