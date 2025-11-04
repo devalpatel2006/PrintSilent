@@ -24,8 +24,8 @@
         };
 
         // Making a POST request to the API
-        fetch("http://printsilently.rept.co.in/api/v1/call-external", {
-                method: "POST", // HTTP method
+        fetch("http://127.0.0.1:8781/shippingprint", {
+                method: "GET", // HTTP method
                 mode: "no-cors",
                 headers: {
                     "Content-Type": "application/json" // Content type expected by the API
