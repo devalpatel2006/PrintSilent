@@ -18,11 +18,13 @@
         // Data to be sent to the API
         const data = {
             printer_name: "HP LaserJet Pro MFP M126nw",
-            imageurl: "https://shipczar.com/usps_label_pdf/1725876169.jpg"
+            imageurl: "https://shipczar.com/usps_label_pdf/1725876169.jpg",
+            height: 432,
+            width: 288
         };
 
         // Making a POST request to the API
-        fetch("http://localhost:8781/shippingprint", {
+        fetch("http://printsilently.rept.co.in/api/v1/call-external", {
                 method: "POST", // HTTP method
                 mode: "no-cors",
                 headers: {
