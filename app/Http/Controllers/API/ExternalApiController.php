@@ -10,9 +10,7 @@ class ExternalApiController extends Controller
 
     public function welcome(Request $request)
     {
-        $clientIp = $request->ip();
-        print_r($clientIp);
-        die;
+
         $printerdata = Http::get('http://127.0.0.1:8781/GetPrinterData')->json(); 
         $printers = $printerdata['printer'] ?? [];
         return view('welcome', compact('printers'));
