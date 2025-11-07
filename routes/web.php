@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\API\ExternalApiController;
+Route::get('/', [ExternalApiController::class, 'welcome'])->name('welcome');

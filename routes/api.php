@@ -17,5 +17,5 @@ use App\Http\Controllers\API\ExternalApiController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::Post('call-external', [ExternalApiController::class, 'psv1']);
+    Route::Post('printpage', [ExternalApiController::class, 'printepage']);
 });

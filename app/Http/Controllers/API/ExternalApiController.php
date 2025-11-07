@@ -7,16 +7,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class ExternalApiController extends Controller
 {
-    public function psv1(Request $request)
+
+    public function welcome(Request $request)
     {
-         //$postData = $request->all(); // or customize the payload
-         //$response = Http::get('http://127.0.0.1:8781/shippingprint', $postData);
-        //  $queryParams = http_build_query($request->all()); // build query string 
-        //  $url = "http://127.0.0.1:8781/shippingprint?$queryParams";
-        //  return redirect()->away($url); // redirect browser to Dart API
-    
-            return response()->json([
+        $printerdata = Http::get('http://localhost:8781/GetPrinterData'); 
+        $printers = $printerdata['printer'] ?? [];
+        return view('welcome', compact('printers'));
+    }
+
+    public function printepage(Request $request)
+    {
+        $printerName = $request->input('printer_name'); // "HP LaserJet Pro MFP M126nw"
+        $imageUrl = $request->input('imageurl');  
+        $queryParams = [
+        'printer' => $printerName,
+        'url' => $imageUrl,
+        // Optionally add width and height
+        'width' => $request->input('width', 1016),
+        'height' => $request->input('height', 2032),
+    ];
+        $postData = $request->all(); // or customize the payload
+        $responsedata = Http::get('http://localhost:8781/shippingprint', $queryParams); 
+        return response()->json([
                 'status' => "true",
-            ]);
+                'response'=> $responsedata
+        ]);
     }
 }

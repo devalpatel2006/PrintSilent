@@ -10,23 +10,29 @@
 <body>
 
     <h1>Print Document</h1>
-
+    <select name="printer" class="form-control">
+        @foreach($printers as $printer)
+        <option value="{{ $printer['name'] }}">
+            {{ $printer['name'] }} ({{ $printer['paperWidth'] }} x {{ $printer['paperHeight'] }})
+        </option>
+        @endforeach
+    </select>
     <button id="printButton">Print Document</button>
 
     <script>
     document.getElementById("printButton").addEventListener("click", function() {
         // Data to be sent to the API
         const data = {
-            printer_name: "HP LaserJet Pro MFP M126nw",
+            printer_name: "EPSON L3260 Series",
             imageurl: "https://shipczar.com/usps_label_pdf/1725876169.jpg"
         };
-
-        // Making a POST request to the API
-        fetch("https://printsilently.rept.co.in/api/v1/call-external", {
+        const API_URL = @json(url('/api/v1/printpage'));
+        fetch(API_URL, {
                 method: "POST", // HTTP method
-                mode: "no-cors",
                 headers: {
-                    "Content-Type": "application/json" // Content type expected by the API
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}" // Important if using web routes
                 },
                 body: JSON.stringify(data) // Convert the data to a JSON string
             })
@@ -46,7 +52,6 @@
             });
     });
     </script>
-
 </body>
 
 </html>
