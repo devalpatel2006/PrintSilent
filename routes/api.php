@@ -18,4 +18,5 @@ use App\Http\Controllers\API\ExternalApiController;
 
 Route::prefix('v1')->group(function () {
     Route::Post('printpage', [ExternalApiController::class, 'printepage']);
+    Route::get('getprinter', [ExternalApiController::class, 'getprinter']);
 });

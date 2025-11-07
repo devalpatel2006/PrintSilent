@@ -15,6 +15,18 @@ class ExternalApiController extends Controller
         return view('welcome', compact('printers'));
     }
 
+      public function getprinter()
+    {
+        $printerdata = Http::get('http://127.0.0.1:8781/GetPrinterData')->json(); 
+        $printers = $printerdata['printer'] ?? [];
+        return response()->json([
+                'status' => "true",
+                'response'=> $printers
+        ]);
+    }
+
+
+
     public function printepage(Request $request)
     {
         $printerName = $request->input('printer_name'); // "HP LaserJet Pro MFP M126nw"
