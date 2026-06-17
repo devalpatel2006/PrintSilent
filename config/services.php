@@ -31,4 +31,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'printer_service' => [
+        'base_url' => env('PRINTER_SERVICE_URL', 'http://127.0.0.1:8781'),
+        'path' => env('PRINTER_SERVICE_PATH', '/GetPrinterData'),
+        'timeout_seconds' => (int) env('PRINTER_SERVICE_TIMEOUT', 5),
+    ],
+
+    'playground' => [
+        'url' => env('PLAYGROUND_TEST_URL', 'http://127.0.0.1:4545/status'),
+        'api_key' => env('PLAYGROUND_API_KEY', 'as1231'),
+        'timeout_seconds' => (int) env('PLAYGROUND_TEST_TIMEOUT', 10),
+    ],
+
 ];

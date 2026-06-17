@@ -14,8 +14,6 @@ class BroadcastServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Broadcast::routes();
-
-        require base_path('routes/channels.php');
+        // Socket and broadcast routes have been removed for a simplified admin-only application.
     }
 }

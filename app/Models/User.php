@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Organization;
+use App\Models\PrintJob;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
     ];
 
     /**
@@ -40,5 +43,35 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
+
+    public function organizations()
+    {
+        return $this->belongsToMany(Organization::class, 'organization_users')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    public function ownedOrganizations()
+    {
+        return $this->organizations()->wherePivot('role', 'owner');
+    }
+
+    public function printJobs()
+    {
+        return $this->hasMany(PrintJob::class);
+    }
+
+    public function belongsToOrganization(int $organizationId): bool
+    {
+        return $this->organizations()->where('organization_id', $organizationId)->exists();
+    }
+
+    public function getRoleForOrganization(int $organizationId): ?string
+    {
+        return $this->organizations()
+            ->where('organization_id', $organizationId)
+            ->first()?->pivot->role;
+    }
 }

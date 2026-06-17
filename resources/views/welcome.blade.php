@@ -10,7 +10,15 @@
 <body>
 
     <h1>Print Document</h1>
+    @if(!empty($printerServiceError))
+    <div style="padding:10px; margin-bottom:12px; color:#842029; background:#f8d7da; border:1px solid #f5c2c7;">
+        {{ $printerServiceError }}
+    </div>
+    @endif
     <select name="printer" class="form-control">
+        @if(empty($printers))
+        <option value="">No printers available</option>
+        @endif
         @foreach($printers as $printer)
         <option value="{{ $printer['name'] }}">
             {{ $printer['name'] }} ({{ $printer['paperWidth'] }} x {{ $printer['paperHeight'] }})
