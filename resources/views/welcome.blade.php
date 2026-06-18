@@ -27,37 +27,28 @@
     </select>
     <button id="printButton">Print Document</button>
 
+    <script src="/js/sp-client.js"></script>
     <script>
-    document.getElementById("printButton").addEventListener("click", function() {
-        // Data to be sent to the API
-        const data = {
-            printer_name: "EPSON L3260 Series",
-            imageurl: "https://shipczar.com/usps_label_pdf/1725876169.jpg"
-        };
-        const API_URL = @json(url('/api/v1/printpage'));
-        fetch(API_URL, {
-                method: "POST", // HTTP method
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}" // Important if using web routes
-                },
-                body: JSON.stringify(data) // Convert the data to a JSON string
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok " + response.statusText);
-                }
-                return response.json(); // Parsing the JSON response
-            })
-            .then(data => {
-                console.log("Success:", data);
-                alert("Print job successfully sent to the printer.");
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Failed to send the print job.");
+    // Direct browser → localhost communication (no server proxy)
+    const sp = new SPClient(4545);
+
+    document.getElementById("printButton").addEventListener("click", async function() {
+        this.disabled = true;
+        this.textContent = 'Sending...';
+        try {
+            const data = await sp.print({
+                url: "https://shipczar.com/usps_label_pdf/1725876169.jpg",
+                printer: "EPSON L3260 Series",
             });
+            console.log("Success:", data);
+            alert("Print job successfully sent to the printer.");
+        } catch (err) {
+            console.error("Error:", err);
+            alert("Failed to send the print job: " + err.message);
+        } finally {
+            this.disabled = false;
+            this.textContent = 'Print Document';
+        }
     });
     </script>
 </body>
