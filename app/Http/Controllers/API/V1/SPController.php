@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Http;
 class SPController extends Controller
 {
     /**
-     * Get the encrypted token from the api_keys table
+     * Get the API token for the current user's organization.
+     * Returns the raw token string that the local agent expects.
      */
     private function getEncryptedToken()
     {
@@ -19,18 +20,20 @@ class SPController extends Controller
 
         $apiKeyModel = null;
         if ($user->is_admin) {
-            $apiKeyModel = \App\Models\ApiKey::first();
+            $apiKeyModel = \App\Models\ApiKey::where('revoked', false)->first();
         } else {
             $orgIds = $user->organizations()->pluck('organizations.id');
-            $apiKeyModel = \App\Models\ApiKey::whereIn('organization_id', $orgIds)->first();
+            $apiKeyModel = \App\Models\ApiKey::whereIn('organization_id', $orgIds)
+                ->where('revoked', false)
+                ->first();
         }
 
         if (!$apiKeyModel) {
             return null;
         }
 
-        $apiKey = $apiKeyModel->token ?? $apiKeyModel->public_key;
-        return $apiKey ? encrypt($apiKey) : null;
+        // Return the raw token — the local agent validates this directly
+        return $apiKeyModel->token;
     }
 
     public function status(Request $request)
