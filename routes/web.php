@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AdminOrganizationController;
 use App\Http\Controllers\Admin\AdminApiKeyController;
 use App\Http\Controllers\Admin\PlaygroundController;
+use App\Http\Controllers\Admin\ApiDocsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Admin Playground
         Route::get('/playground', [PlaygroundController::class, 'index'])->name('playground.index');
+
+        // API Documentation
+        Route::get('/api-docs', [ApiDocsController::class, 'index'])->name('api-docs.index');
 
         // New Resource Routes
         Route::resource('organizations', AdminOrganizationController::class);

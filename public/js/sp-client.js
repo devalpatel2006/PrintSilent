@@ -15,11 +15,12 @@ class SPClient {
 
     /**
      * @param {number} port - Local agent port (default: 4545)
+     * @param {string} encryptedToken - Encrypted token from api_keys table
      */
-    constructor(port = 4545) {
+    constructor(port = 4545, encryptedToken = '') {
         this._port = port;
         this._baseUrl = `http://127.0.0.1:${port}`;
-        this._apiKey = 'SPRINT_SAAS_SECURE_KEY_2024';
+        this._encryptedToken = encryptedToken;
         this._timeout = 5000; // 5 seconds
     }
 
@@ -69,10 +70,6 @@ class SPClient {
         return this._get(`/v1/print/url?${params.toString()}`);
     }
 
-    /* ------------------------------------------------------------------ */
-    /*  Internal helpers                                                    */
-    /* ------------------------------------------------------------------ */
-
     /**
      * @private
      */
@@ -85,7 +82,7 @@ class SPClient {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
-                    'x-api-key': this._apiKey,
+                    'x-api-key': this._encryptedToken,
                 },
                 signal: controller.signal,
             });
@@ -130,6 +127,14 @@ class SPClient {
     setPort(port) {
         this._port = port;
         this._baseUrl = `http://127.0.0.1:${port}`;
+    }
+
+    /**
+     * Update token at runtime.
+     * @param {string} token
+     */
+    setToken(token) {
+        this._encryptedToken = token;
     }
 }
 

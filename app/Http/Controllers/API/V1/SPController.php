@@ -7,69 +7,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class SPController extends Controller
 {
-    public function status($port = 4545)
+    /**
+     * Get the encrypted token from the api_keys table
+     */
+    private function getEncryptedToken()
     {
-        try {
-            $response = Http::get("http://127.0.0.1:{$port}/status");
-            return response()->json($response->json(), $response->status());
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'inactive',
-                'error' => 'failed'
-            ], 500);
-        }
+        // Fetch the token from the api_keys table (modify query as needed for specific users)
+        $apiKey = \Illuminate\Support\Facades\DB::table('api_keys')->value('token');
+        
+        // Return the encrypted token
+        return encrypt($apiKey);
+    }
+
+    public function status(Request $request)
+    {
+        // 1. Add your tracking/logging logic here
+        // e.g., \Log::info('Agent status check initiated', ['user_id' => auth()->id()]);
+
+        // 2. Return the token so the frontend can execute the local call
+        return response()->json([
+            'success' => true,
+            'encryptedToken' => $this->getEncryptedToken()
+        ]);
     }
 
    public function fetch_printer_list(Request $request)
-{
-    try {
-
-        $port = $request->input('port', 4545); // Default port 4545
-
-        $response = Http::withHeaders([
-            'x-api-key' => 'SPRINT_SAAS_SECURE_KEY_2024',
-        ])->get("http://127.0.0.1:{$port}/v1/printers");
-
-        return response()->json(
-            $response->json(),
-            $response->status()
-        );
-
-    } catch (\Exception $e) {
+   {
+        // 1. Add your tracking/logging logic here
+        // e.g., \Log::info('Printer list fetch initiated', ['user_id' => auth()->id()]);
 
         return response()->json([
-            'status' => false,
-            'message' => $e->getMessage(),
-        ], 500);
-    }
-}
+            'success' => true,
+            'encryptedToken' => $this->getEncryptedToken()
+        ]);
+   }
+
     public function print(Request $request)
     {
-        try {
+        // 1. Add your tracking/logging logic here
+        // e.g., \Log::info('Print job initiated', [
+        //     'user_id' => auth()->id(),
+        //     'printer' => $request->printer,
+        //     'url' => $request->url
+        // ]);
 
-            $port = $request->input('port', 4545);
-
-            $response = Http::withHeaders([
-                'x-api-key' => 'SPRINT_SAAS_SECURE_KEY_2024',
-            ])->get("http://127.0.0.1:{$port}/v1/print/url", [
-                'url'     => $request->url,
-                'printer' => $request->printer,
-                'width'   => $request->width ?? 101.6,
-                'height'  => $request->height ?? 152.4,
-                'copies'  => $request->copies ?? 1,
-            ]);
-
-            return response()->json(
-                $response->json(),
-                $response->status()
-            );
-
-        } catch (\Exception $e) {
-
-            return response()->json([
-                'status' => false,
-                'message' => $e->getMessage(),
-            ], 500);
-        }
+        return response()->json([
+            'success' => true,
+            'encryptedToken' => $this->getEncryptedToken()
+        ]);
     }
 }
