@@ -11,13 +11,22 @@ class AdminApiKeyController extends Controller
 {
     public function index()
     {
-        $apiKeys = ApiKey::with('organization')->orderBy('created_at', 'desc')->get();
+        if (auth()->user()->is_admin) {
+            $apiKeys = ApiKey::with('organization')->orderBy('created_at', 'desc')->get();
+        } else {
+            $orgIds = auth()->user()->organizations()->pluck('organizations.id');
+            $apiKeys = ApiKey::with('organization')->whereIn('organization_id', $orgIds)->orderBy('created_at', 'desc')->get();
+        }
         return view('admin.api-keys.index', compact('apiKeys'));
     }
 
     public function create()
     {
-        $organizations = Organization::orderBy('name')->get();
+        if (auth()->user()->is_admin) {
+            $organizations = Organization::orderBy('name')->get();
+        } else {
+            $organizations = auth()->user()->organizations()->orderBy('name')->get();
+        }
         return view('admin.api-keys.create', compact('organizations'));
     }
 
@@ -31,6 +40,10 @@ class AdminApiKeyController extends Controller
             'abilities' => 'nullable|string',
             'allowed_ips' => 'nullable|string',
         ]);
+
+        if (!auth()->user()->is_admin && !auth()->user()->belongsToOrganization($validated['organization_id'])) {
+            abort(403, 'Unauthorized access.');
+        }
 
         $secret = ApiKey::generateSecret();
         
@@ -66,6 +79,10 @@ class AdminApiKeyController extends Controller
 
     public function destroy(ApiKey $apiKey)
     {
+        if (!auth()->user()->is_admin && !auth()->user()->belongsToOrganization($apiKey->organization_id)) {
+            abort(403, 'Unauthorized access.');
+        }
+
         $apiKey->update(['revoked' => true]);
         return redirect()->route('admin.api-keys.index')
             ->with('success', 'API Key revoked successfully.');

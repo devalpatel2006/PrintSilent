@@ -3,6 +3,17 @@
 @section('title', 'Dashboard')
 
 @section('content')
+<div style="margin-bottom: 24px;">
+    <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700;">Welcome, {{ auth()->user()->name }}</h2>
+    <p style="margin: 4px 0 0; color: var(--text-secondary); font-size: 0.9rem;">
+        @if(auth()->user()->is_admin)
+            Here is the global overview of the entire platform.
+        @else
+            Here is the overview of your organizations and resources.
+        @endif
+    </p>
+</div>
+
 <div class="stats-grid">
     @foreach($stats as $key => $value)
         <div class="stat-card">

@@ -12,19 +12,9 @@
         </a>
     </div>
 
-    @if(session('created_api_key'))
-        <div class="alert alert-success animate-slide-in" style="flex-direction: column; align-items: flex-start; gap: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
-            <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #34d399;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <div style="font-weight: 600; font-size: 1.125rem;">Token Generated Successfully</div>
-            </div>
-            
-            <div style="width: 100%; padding: 16px; background: rgba(0,0,0,0.3); border-radius: 8px;">
-                <p style="margin-bottom: 12px; font-size: 0.875rem;">Please copy this secret key now. You will not be able to see it again!</p>
-                <div class="secret-key-display">
-                    {{ session('created_api_key')['secret'] }}
-                </div>
-            </div>
+    @if(session('success'))
+        <div class="alert alert-success animate-slide-in">
+            {{ session('success') }}
         </div>
     @endif
 
@@ -34,7 +24,7 @@
                 <tr>
                     <th>Organization</th>
                     <th>Token Name</th>
-                    <th>Public Key</th>
+                    <th>Token Key</th>
                     <th>Status</th>
                     <th>Last Used</th>
                     <th>Actions</th>
@@ -45,7 +35,19 @@
                 <tr>
                     <td>{{ $key->organization->name ?? 'N/A' }}</td>
                     <td style="font-weight: 500;">{{ $key->name }}</td>
-                    <td style="font-family: monospace; color: var(--text-secondary);">{{ substr($key->public_key, 0, 16) }}...</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-family: monospace; color: var(--text-secondary); background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; letter-spacing: 2px;" id="token-display-{{ $key->id }}">
+                                ••••••••••••••••••••••••••••••••
+                            </span>
+                            <!-- Hidden input holding actual token value -->
+                            <input type="hidden" id="token-val-{{ $key->id }}" value="{{ $key->token ?? $key->public_key }}">
+                            
+                            <button type="button" class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem;" onclick="copyToken('token-val-{{ $key->id }}', this)">
+                                Copy
+                            </button>
+                        </div>
+                    </td>
                     <td>
                         @if($key->revoked)
                             <span class="badge inactive">Revoked</span>
@@ -79,4 +81,29 @@
         </table>
     </div>
 </div>
+
+@push('scripts')
+<script>
+function copyToken(elementId, btn) {
+    const el = document.getElementById(elementId);
+    const textToCopy = el.value !== undefined ? el.value : el.innerText.trim();
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = 'Copied!';
+        btn.style.borderColor = 'var(--success)';
+        btn.style.color = 'var(--success)';
+        
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.borderColor = '';
+            btn.style.color = '';
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+}
+</script>
+@endpush
+
 @endsection

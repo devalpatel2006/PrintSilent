@@ -11,17 +11,28 @@ class AdminOrganizationController extends Controller
 {
     public function index()
     {
-        $organizations = Organization::orderBy('created_at', 'desc')->get();
+        if (auth()->user()->is_admin) {
+            $organizations = Organization::orderBy('created_at', 'desc')->get();
+        } else {
+            $organizations = auth()->user()->organizations()->orderBy('created_at', 'desc')->get();
+        }
         return view('admin.organizations.index', compact('organizations'));
     }
 
     public function create()
     {
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Unauthorized access.');
+        }
         return view('admin.organizations.create');
     }
 
     public function store(Request $request)
     {
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Unauthorized access.');
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'domain' => 'nullable|string|max:255',
@@ -49,16 +60,20 @@ class AdminOrganizationController extends Controller
 
     public function show(Organization $organization)
     {
+        $this->authorizeAccess($organization);
         return view('admin.organizations.show', compact('organization'));
     }
 
     public function edit(Organization $organization)
     {
+        $this->authorizeAccess($organization);
         return view('admin.organizations.edit', compact('organization'));
     }
 
     public function update(Request $request, Organization $organization)
     {
+        $this->authorizeAccess($organization);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'domain' => 'nullable|string|max:255',
@@ -72,8 +87,19 @@ class AdminOrganizationController extends Controller
 
     public function destroy(Organization $organization)
     {
+        if (!auth()->user()->is_admin) {
+            abort(403, 'Unauthorized access.');
+        }
+
         $organization->delete();
         return redirect()->route('admin.organizations.index')
             ->with('success', 'Organization deleted successfully.');
+    }
+
+    private function authorizeAccess(Organization $organization)
+    {
+        if (!auth()->user()->is_admin && !auth()->user()->belongsToOrganization($organization->id)) {
+            abort(403, 'Unauthorized access.');
+        }
     }
 }

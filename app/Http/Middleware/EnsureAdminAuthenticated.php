@@ -10,9 +10,9 @@ class EnsureAdminAuthenticated
 {
     public function handle(Request $request, Closure $next)
     {
-        if (! Auth::check() || ! (bool) Auth::user()->is_admin) {
-            return redirect()->route('admin.login')->withErrors([
-                'email' => 'Please login with an admin account.',
+        if (! Auth::check()) {
+            return redirect()->route('login')->withErrors([
+                'email' => 'Please login to access the dashboard.',
             ]);
         }
 

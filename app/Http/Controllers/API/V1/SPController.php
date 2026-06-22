@@ -12,19 +12,35 @@ class SPController extends Controller
      */
     private function getEncryptedToken()
     {
-        // Fetch the token from the api_keys table (modify query as needed for specific users)
-        $apiKey = \Illuminate\Support\Facades\DB::table('api_keys')->value('token');
-        
-        // Return the encrypted token
-        return encrypt($apiKey);
+        $user = auth('web')->user();
+        if (!$user) {
+            return null;
+        }
+
+        $apiKeyModel = null;
+        if ($user->is_admin) {
+            $apiKeyModel = \App\Models\ApiKey::first();
+        } else {
+            $orgIds = $user->organizations()->pluck('organizations.id');
+            $apiKeyModel = \App\Models\ApiKey::whereIn('organization_id', $orgIds)->first();
+        }
+
+        if (!$apiKeyModel) {
+            return null;
+        }
+
+        $apiKey = $apiKeyModel->token ?? $apiKeyModel->public_key;
+        return $apiKey ? encrypt($apiKey) : null;
     }
 
     public function status(Request $request)
     {
-        // 1. Add your tracking/logging logic here
-        // e.g., \Log::info('Agent status check initiated', ['user_id' => auth()->id()]);
+        \Log::info('SPController@status hit', [
+            'session_id' => $request->session()->getId(),
+            'user' => auth('web')->user() ? auth('web')->user()->id : null,
+            'cookies' => $request->cookies->all()
+        ]);
 
-        // 2. Return the token so the frontend can execute the local call
         return response()->json([
             'success' => true,
             'encryptedToken' => $this->getEncryptedToken()
