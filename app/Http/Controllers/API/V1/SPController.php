@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 class SPController extends Controller
 {
     /**
-     * Get the API token for the current user's organization.
-     * Returns the raw token string that the local agent expects.
+     * Get the API key for the current user's organization.
+     * Returns the public_key string that the local agent validates against.
      */
     private function getEncryptedToken()
     {
@@ -32,8 +32,8 @@ class SPController extends Controller
             return null;
         }
 
-        // Return the raw token — the local agent validates this directly
-        return $apiKeyModel->token;
+        // Return the public_key — the agent validates X-API-KEY against this value
+        return $apiKeyModel->public_key;
     }
 
     public function status(Request $request)
