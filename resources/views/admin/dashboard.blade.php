@@ -26,6 +26,22 @@
     @endforeach
 </div>
 
+<div class="panel" style="margin-bottom: 24px; border-radius: 12px; border: 1px solid var(--border);">
+    <div class="panel-header" style="border-bottom: 1px solid var(--border); padding: 16px 24px;">
+        <h3 class="panel-title" style="margin: 0; font-size: 1.1rem; font-weight: 600;">Download Client Software</h3>
+    </div>
+    <div class="panel-body" style="padding: 24px; display: flex; gap: 16px; flex-wrap: wrap; background: var(--surface);">
+        <a href="{{ asset('mac/PrintSilently.dmg') }}" class="btn btn-primary" download style="display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download for Mac (.dmg)
+        </a>
+        <a href="{{ asset('windows/PrintSilently.exe') }}" class="btn btn-outline" download style="display: flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--border); color: var(--text);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download for Windows (.exe)
+        </a>
+    </div>
+</div>
+
 <div class="form-grid">
     <div class="panel">
         <div class="panel-header">
