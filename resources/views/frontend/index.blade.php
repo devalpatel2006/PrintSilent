@@ -23,16 +23,17 @@
         </div>
       </div>
       <nav class="nav-links">
-        <a href="#why">Why</a>
-        <a href="#platform">Platform</a>
-        <a href="#api">API</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
+      
+        <a href="#download">DOWNLOAD</a>
+        <a href="#pricing">PRICING</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#faq">FAQ</a>
       </nav>
       <div class="nav-actions">
-        <button class="ghost-btn" id="themeToggle">Dark</button>
+     
         <a href="{{ route('login') }}" style="color: var(--text); text-decoration: none; font-weight: 500; margin-right: 12px;">Sign in</a>
-        <a class="button primary" href="{{ route('register') }}">Start free trial</a>
+        <a class="button primary" href="{{ route('register') }}">Get Started</a>
+        <button class="ghost-btn" id="themeToggle">Dark</button>
       </div>
     </header>
 
@@ -43,18 +44,10 @@
           <h1>Silent printing for modern businesses.</h1>
           <p>Connect your web applications directly to local printers using our secure desktop bridge technology — instant, silent, and fully automated.</p>
           <div class="hero-actions">
-            <a class="button primary" href="{{ route('register') }}">Start free trial</a>
+            <a class="button primary" href="{{ route('register') }}">Get Started</a>
             <a class="button secondary" href="{{ route('register') }}">Get API key</a>
           </div>
-          <div class="hero-trust">
-            <span>Trusted by</span>
-            <div class="logos">
-              <span>ERPONE</span>
-              <span>POSFLOW</span>
-              <span>WARENET</span>
-              <span>MEDCORE</span>
-            </div>
-          </div>
+       
         </div>
 
         <div class="hero-panel animate-on-scroll delay-200">
@@ -92,11 +85,31 @@
           </div>
           <div class="floating-card">
             <p class="floating-title">Cloud app</p>
-            <div class="floating-detail">Secure websocket tunnel</div>
+            <div class="floating-detail">Secure communication tunnel</div>
           </div>
         </div>
       </section>
-
+      <section id="download" class="download-section animate-on-scroll delay-100" style="padding: 80px 40px; margin: 40px 0; position: relative; border-radius: 32px; background: linear-gradient(135deg, rgba(124, 92, 255, 0.05), rgba(0, 211, 255, 0.05)); border: 1px solid var(--border); overflow: hidden;">
+        <div style="position: absolute; top: -50%; left: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(124, 92, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;"></div>
+        <div style="position: absolute; bottom: -50%; right: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(0, 211, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;"></div>
+        
+        <div style="position: relative; z-index: 1; text-align: center; max-width: 740px; margin: 0 auto;">
+          <span class="eyebrow" style="margin-bottom: 24px;">Get Started</span>
+          <h2 style="font-size: clamp(2.2rem, 3vw, 2.8rem); margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em;">Download our App</h2>
+          <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; margin-bottom: 44px;">Install the secure desktop client to instantly connect your local printers to your cloud web applications.</p>
+          
+          <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
+            <a class="button primary" href="{{ asset('mac/PrintSilently.dmg') }}" download style="display: flex; align-items: center; gap: 12px; padding: 18px 36px; font-size: 1.1rem; box-shadow: 0 20px 40px rgba(124, 92, 255, 0.3);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Download for Mac OS
+            </a>
+            <a class="button secondary" href="{{ asset('windows/PrintSilently.exe') }}" download style="display: flex; align-items: center; gap: 12px; padding: 18px 36px; font-size: 1.1rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Download for Windows
+            </a>
+          </div>
+        </div>
+      </section>
       <section class="feature-grid" id="why">
         <div class="feature-card animate-on-scroll delay-100">
           <h3>Silent background printing</h3>
@@ -115,116 +128,78 @@
           <p>Role controls, audit logs, SLA monitoring, regional deployments and priority failover.</p>
         </div>
       </section>
-
-      <section class="story-block" id="platform">
+      <section class="story-block" id="about">
         <div class="story-copy animate-on-scroll">
           <span class="eyebrow">Platform vision</span>
           <h2>From cloud event to local printer in milliseconds.</h2>
           <p>Print Silently is the infrastructure layer for background printing — a secure bridge between SaaS applications and local print hardware with intelligent routing, retry orchestration, and full enterprise control.</p>
           <div class="story-list">
-            <div><strong>Real-time print queue</strong><p>See every job, health metric, and printer status in one premium dashboard.</p></div>
-            <div><strong>Smart printer routing</strong><p>Route by location, device type, priority, and contextual rules.</p></div>
-            <div><strong>Offline queue sync</strong><p>Print jobs are retained, retryable, and resilient across network drops.</p></div>
+            <div><strong>One-Click E-commerce Integration</strong><p>Connect Shopify, WooCommerce, Amazon, Flipkart, and other platforms to automatically receive and process orders.</p></div>
+            <div><strong>Silent Background Printing</strong><p>Print invoices, shipping labels, packing slips, and receipts instantly without any print dialog or user intervention.</p></div>
+            <div><strong>Truly Silent Printing</strong><p>Automatically print invoices, labels, and packing slips without popups, dialogs, or manual clicks.</p></div>
           </div>
         </div>
         <div class="story-visual glass-card animate-on-scroll delay-200">
           <div class="visual-header"><span>Device pairing</span><span>Secure tunnel</span></div>
           <div class="visual-stack">
             <div class="stack-chip">ERP / CRM / POS</div>
-            <div class="stack-chip">Webhook + REST API</div>
+            <div class="stack-chip">REST API</div>
             <div class="stack-chip">Desktop bridge</div>
             <div class="stack-chip">Local printers</div>
           </div>
         </div>
       </section>
+   <section class="pricing" id="pricing">
+  <div class="section-heading">
+    <span class="eyebrow">Pricing</span>
+    <h2>Choose the plan that fits your business, from startups to enterprise-scale operations.</h2>
+  </div>
 
-      <section class="download-section animate-on-scroll delay-100" style="padding: 80px 40px; margin: 40px 0; position: relative; border-radius: 32px; background: linear-gradient(135deg, rgba(124, 92, 255, 0.05), rgba(0, 211, 255, 0.05)); border: 1px solid var(--border); overflow: hidden;">
-        <div style="position: absolute; top: -50%; left: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(124, 92, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;"></div>
-        <div style="position: absolute; bottom: -50%; right: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(0, 211, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;"></div>
-        
-        <div style="position: relative; z-index: 1; text-align: center; max-width: 740px; margin: 0 auto;">
-          <span class="eyebrow" style="margin-bottom: 24px;">Get Started</span>
-          <h2 style="font-size: clamp(2.2rem, 3vw, 2.8rem); margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em;">Download the local bridge</h2>
-          <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; margin-bottom: 44px;">Install the secure desktop client to instantly connect your local printers to your cloud web applications.</p>
-          
-          <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-            <a class="button primary" href="{{ asset('mac/PrintSilently.dmg') }}" download style="display: flex; align-items: center; gap: 12px; padding: 18px 36px; font-size: 1.1rem; box-shadow: 0 20px 40px rgba(124, 92, 255, 0.3);">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              Download for Mac OS
-            </a>
-            <a class="button secondary" href="{{ asset('windows/PrintSilently.exe') }}" download style="display: flex; align-items: center; gap: 12px; padding: 18px 36px; font-size: 1.1rem;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              Download for Windows
-            </a>
-          </div>
-        </div>
-      </section>
+  <div class="pricing-grid">
+    <article class="price-card animate-on-scroll delay-100">
+      <h3>Free</h3>
+      <p>Full access to Silent Print features for individuals and small businesses.</p>
+      <p class="price">$0<span>/mo</span></p>
+      <ul>
+        <li>Unlimited print jobs</li>
+        <li>Connect multiple stores</li>
+        <li>Silent background printing</li>
+        <li>Shipping labels & invoices</li>
+        <li>Offline queue support</li>
+        <li>Email support</li>
+      </ul>
+      <a class="button ghost" href="{{ route('register') }}">Get Started</a>
+    </article>
+        <article class="price-card recommended animate-on-scroll delay-200">
+          <h3>White Label</h3>
+          <p>Your own branded printing solution with custom software and identity.</p>
+          <p class="price">Custom Pricing</p>
+          <ul>
+            <li>Custom logo & branding</li>
+            <li>Custom desktop application</li>
+            <li>Custom domain & portal</li>
+            <li>Dedicated API integration</li>
+            <li>Priority support</li>
+            <li>Deployment assistance</li>
+          </ul>
+          <a class="button primary" href="{{ route('register') }}">Contact Sales</a>
+        </article>
 
-      <section class="api-grid" id="api">
-        <div class="section-heading">
-          <span class="eyebrow">Developer-first</span>
-          <h2>One API for print orchestration, keys, webhooks, and device control.</h2>
-        </div>
-        <div class="api-cards">
-          <div class="api-card animate-on-scroll delay-100">
-            <span>API Keys</span>
-            <p>Issue keys, set scopes, and manage usage for each integration.</p>
+        <article class="price-card animate-on-scroll delay-300">
+          <h3>Enterprise</h3>
+          <p>Advanced infrastructure, security, and dedicated support for large organizations.</p>
+          <p class="price">Contact Sales</p>
+          <ul>
+            <li>Unlimited organizations</li>
+            <li>SSO & role management</li>
+            <li>Dedicated infrastructure</li>
+            <li>Advanced analytics</li>
+            <li>Custom SLA</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a class="button ghost" href="{{ route('register') }}">Request Quote</a>
+        </article>
           </div>
-          <div class="api-card animate-on-scroll delay-200">
-            <span>Webhooks</span>
-            <p>Receive job events, retries, and device state updates in real time.</p>
-          </div>
-          <div class="api-card animate-on-scroll delay-300">
-            <span>SDK-ready</span>
-            <p>PHP, Node.js, Python, Dart, Java, C#, React and framework samples.</p>
-          </div>
-          <div class="api-card animate-on-scroll delay-400">
-            <span>Rate limits</span>
-            <p>Usage metering, per-tenant limits, and enterprise SLA throughput.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="pricing" id="pricing">
-        <div class="section-heading">
-          <span class="eyebrow">Pricing</span>
-          <h2>Flexible plans for startups, operations teams, and enterprise fleets.</h2>
-        </div>
-        <div class="pricing-grid">
-          <article class="price-card animate-on-scroll delay-100">
-            <h3>Free</h3>
-            <p>Proof of concept and developer integrations.</p>
-            <p class="price">$0<span>/mo</span></p>
-            <ul>
-              <li>100 print jobs</li>
-              <li>1 organization</li>
-              <li>Email support</li>
-            </ul>
-            <a class="button ghost" href="{{ route('register') }}">Get started</a>
-          </article>
-          <article class="price-card recommended animate-on-scroll delay-200">
-            <h3>Business</h3>
-            <p>For growing teams and production deployments.</p>
-            <p class="price">$149<span>/mo</span></p>
-            <ul>
-              <li>10,000 print jobs</li>
-              <li>Multi-team support</li>
-              <li>API keys + webhooks</li>
-            </ul>
-            <a class="button primary" href="{{ route('register') }}">Book demo</a>
-          </article>
-          <article class="price-card animate-on-scroll delay-300">
-            <h3>Enterprise</h3>
-            <p>Custom SLA, regional deployment, and audit controls.</p>
-            <p class="price">Contact sales</p>
-            <ul>
-              <li>Unlimited jobs</li>
-              <li>SSO + device policies</li>
-              <li>Dedicated onboarding</li>
-            </ul>
-            <a class="button ghost" href="{{ route('register') }}">Request quote</a>
-          </article>
-        </div>
       </section>
 
       <section class="testimonial-section">
@@ -248,7 +223,7 @@
         </div>
       </section>
 
-      <section class="faq" id="contact">
+      <section class="faq" id="faq">
         <div class="section-heading">
           <span class="eyebrow">FAQ</span>
           <h2>Everything you need to know before you build.</h2>
@@ -279,10 +254,10 @@
           <p>Seamless eCommerce. Effortless Shipping. Background printing for Cloud, ERP, POS, and logistics.</p>
         </div>
         <div class="footer-links">
-          <a href="#why">Why</a>
-          <a href="#platform">Platform</a>
-          <a href="#api">API</a>
-          <a href="#pricing">Pricing</a>
+           <a href="#download">DOWNLOAD</a>
+        <a href="#pricing">PRICING</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#faq">FAQ</a>
         </div>
       </footer>
     </main>
