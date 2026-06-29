@@ -13,7 +13,7 @@
     </div>
 
     <div class="hero-panel animate-on-scroll delay-200">
-        <div class="panel-card glass-card">
+        <div class="panel-card glass-card" data-tilt>
             <div class="panel-header">
                 <span class="status-pill">Live queue</span>
                 <span class="status-chip">99.98% success</span>
@@ -21,11 +21,11 @@
             <div class="panel-body">
                 <div class="panel-row">
                     <div>
-                        <p class="panel-number">14.8k</p>
+                        <p class="panel-number" data-count="14.8" data-suffix="k">0</p>
                         <span>Jobs processed</span>
                     </div>
                     <div>
-                        <p class="panel-number">23</p>
+                        <p class="panel-number" data-count="23">0</p>
                         <span>Connected printers</span>
                     </div>
                 </div>
@@ -52,44 +52,50 @@
     </div>
 </section>
 
-<section id="download" class="download-section animate-on-scroll delay-100" style="padding: 80px 40px; margin: 40px 0; position: relative; border-radius: 32px; background: linear-gradient(135deg, rgba(124, 92, 255, 0.05), rgba(0, 211, 255, 0.05)); border: 1px solid var(--border); overflow: hidden;">
-    <div style="position: absolute; top: -50%; left: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(124, 92, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;" aria-hidden="true"></div>
-    <div style="position: absolute; bottom: -50%; right: -10%; width: 50%; height: 200%; background: radial-gradient(circle, rgba(0, 211, 255, 0.15), transparent 70%); filter: blur(60px); z-index: 0; pointer-events: none;" aria-hidden="true"></div>
-    
-    <div style="position: relative; z-index: 1; text-align: center; max-width: 740px; margin: 0 auto;">
-        <span class="eyebrow" style="margin-bottom: 24px;">Get Started</span>
+<section class="cta-banner animate-on-scroll">
+    <div class="cta-banner-glow" aria-hidden="true"></div>
+    <div class="cta-banner-glow-2" aria-hidden="true"></div>
+    <div class="cta-banner-inner">
+        <span class="eyebrow">Get Started</span>
         <h2 style="font-size: clamp(2.2rem, 3vw, 2.8rem); margin: 0 0 20px; font-weight: 800; letter-spacing: -0.03em;">Download our App</h2>
         <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; margin-bottom: 44px;">Install the secure desktop client to instantly connect your local printers to your cloud web applications.</p>
-        
-        <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-            <a class="button primary" href="{{ route('pages.download') }}" style="display: flex; align-items: center; gap: 12px; padding: 18px 36px; font-size: 1.1rem; box-shadow: 0 20px 40px rgba(124, 92, 255, 0.3);">
-                View Downloads
-            </a>
-        </div>
+        <a class="button primary" href="{{ route('pages.download') }}" style="padding: 18px 36px; font-size: 1.1rem;">View Downloads</a>
     </div>
 </section>
 
-<section class="feature-grid" id="why">
-    <article class="feature-card animate-on-scroll delay-100">
+<section class="feature-grid" id="why" data-stagger="100">
+    <article class="feature-card">
+        <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </div>
         <h3>Silent background printing</h3>
         <p>Print documents instantly without modal dialogs, keyboard interaction, or browser prompts.</p>
     </article>
-    <article class="feature-card animate-on-scroll delay-200">
+    <article class="feature-card">
+        <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
         <h3>Secure local bridge</h3>
         <p>Encrypted device pairing, token-based authorization, and zero-trust print delivery.</p>
     </article>
-    <article class="feature-card animate-on-scroll delay-300">
+    <article class="feature-card">
+        <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
         <h3>Universal integrations</h3>
         <p>Embed into ERP, POS, logistics, healthcare, warehouse, and SaaS systems with a single API.</p>
     </article>
-    <article class="feature-card animate-on-scroll delay-400">
+    <article class="feature-card">
+        <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <h3>Enterprise-ready</h3>
         <p>Role controls, audit logs, SLA monitoring, regional deployments and priority failover.</p>
     </article>
 </section>
 
 <section class="story-block" id="about">
-    <div class="story-copy animate-on-scroll">
+    <div class="story-copy reveal-left">
         <span class="eyebrow">Platform vision</span>
         <h2>From cloud event to local printer in milliseconds.</h2>
         <p>Print Silently is the infrastructure layer for background printing — a secure bridge between SaaS applications and local print hardware with intelligent routing, retry orchestration, and full enterprise control.</p>
@@ -104,10 +110,10 @@
             </div>
         </div>
         <div style="margin-top: 32px;">
-            <a href="{{ route('pages.features') }}" style="color: var(--accent); font-weight: 600; text-decoration: none;">View all features &rarr;</a>
+            <a href="{{ route('pages.features') }}" class="text-link">View all features &rarr;</a>
         </div>
     </div>
-    <div class="story-visual glass-card animate-on-scroll delay-200">
+    <div class="story-visual glass-card reveal-right" data-tilt>
         <div class="visual-header"><span>Device pairing</span><span>Secure tunnel</span></div>
         <div class="visual-stack">
             <div class="stack-chip">ERP / CRM / POS</div>
@@ -119,21 +125,21 @@
 </section>
 
 <section class="testimonial-section">
-    <div class="section-heading">
+    <div class="section-heading animate-on-scroll">
         <span class="eyebrow">Built for customers</span>
         <h2>Operational teams trust Print Silently for mission-critical printing.</h2>
     </div>
-    <div class="testimonial-grid">
-        <article class="testimonial-card animate-on-scroll delay-100">
-            <p>“Print Silently replaced our manual label printing flow and eliminated every browser dialog. The integration was seamless and instantly reliable.”</p>
+    <div class="testimonial-grid" data-stagger="120">
+        <article class="testimonial-card">
+            <p>"Print Silently replaced our manual label printing flow and eliminated every browser dialog. The integration was seamless and instantly reliable."</p>
             <footer>— Sarah Jain, CTO at LogisticsOne</footer>
         </article>
-        <article class="testimonial-card animate-on-scroll delay-200">
-            <p>“Our hospitals now print prescriptions and wristbands silently across 18 clinics with full auditing and device policies.”</p>
+        <article class="testimonial-card">
+            <p>"Our hospitals now print prescriptions and wristbands silently across 18 clinics with full auditing and device policies."</p>
             <footer>— Marco Lee, IT Director at MediChain</footer>
         </article>
-        <article class="testimonial-card animate-on-scroll delay-300">
-            <p>“The API-first developer experience and device heartbeat monitoring give us confidence to scale globally.”</p>
+        <article class="testimonial-card">
+            <p>"The API-first developer experience and device heartbeat monitoring give us confidence to scale globally."</p>
             <footer>— Elena Ruiz, Head of Operations at SmartPOS</footer>
         </article>
     </div>

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\SitemapController;
+use App\Http\Controllers\Frontend\ContactController;
+
 
 // ─── Frontend Static Pages (SEO) ─────────────────────────────────────
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -21,6 +23,8 @@ Route::get('/download', [PageController::class, 'download'])->name('pages.downlo
 Route::get('/api-documentation', [PageController::class, 'apiDocs'])->name('pages.api-docs');
 Route::get('/faq', [PageController::class, 'faq'])->name('pages.faq');
 Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('pages.contact.submit');
+
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('pages.privacy');
 Route::get('/terms-of-service', [PageController::class, 'terms'])->name('pages.terms');
 Route::get('/about', [PageController::class, 'about'])->name('pages.about');
@@ -63,6 +67,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Visitor Tracking
         Route::get('/visitors', [\App\Http\Controllers\Admin\AdminVisitorController::class, 'index'])->name('visitors.index');
+
+        // Contact Messages
+        Route::get('/contacts', [\App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('contacts.index');
+
         Route::delete('/visitors/delete-all', [\App\Http\Controllers\Admin\AdminVisitorController::class, 'deleteAll'])->name('visitors.delete_all');
     });
 });

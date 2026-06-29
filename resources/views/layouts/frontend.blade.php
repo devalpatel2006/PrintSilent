@@ -1,145 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-  {{-- SEO Meta Tags --}}
-  @include('components.seo.meta-tags')
+    @include('components.seo.meta-tags')
 
-  {{-- Preconnect for Performance --}}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
 
-  {{-- Font Loading with display=swap for CWV --}}
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preload" href="{{ asset('css/frontend.css') }}" as="style" />
+    <link rel="stylesheet" href="{{ asset('css/frontend.css') }}" />
 
-  {{-- Preload Critical CSS --}}
-  <link rel="preload" href="{{ asset('css/frontend.css') }}" as="style" />
-  <link rel="stylesheet" href="{{ asset('css/frontend.css') }}" />
+    <link rel="icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.jpg') }}" />
 
-  {{-- Favicon --}}
-  <link rel="icon" href="{{ asset('favicon.ico') }}" />
-  <link rel="apple-touch-icon" href="{{ asset('images/logo.jpg') }}" />
+    @include('components.seo.json-ld')
 
-  {{-- JSON-LD Structured Data --}}
-  @include('components.seo.json-ld')
-
-  @stack('head')
+    @stack('head')
 </head>
+
 <body>
-  {{-- Skip to main content — Accessibility --}}
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <div class="bg-orb orb-1" aria-hidden="true"></div>
-  <div class="bg-orb orb-2" aria-hidden="true"></div>
+    <div class="bg-mesh" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-orb orb-1" aria-hidden="true"></div>
+    <div class="bg-orb orb-2" aria-hidden="true"></div>
+    <div class="bg-orb orb-3" aria-hidden="true"></div>
 
-  <div class="page-shell">
-    {{-- ─── Site Header ─────────────────────────────────────────── --}}
-    <header class="topbar" role="banner">
-      <a href="{{ route('home') }}" class="brand" aria-label="PrintSilently — Home">
-        <img src="{{ asset('images/logo.jpg') }}" alt="PrintSilently Logo" width="48" height="48" style="border-radius: 8px;" fetchpriority="high" />
-        <div>
-          <p class="brand-label">Print Silently</p>
-          <span class="brand-tag">Seamless eCommerce</span>
-        </div>
-      </a>
+    <div class="page-shell">
+        <header class="topbar" role="banner">
+            <a href="{{ route('home') }}" class="brand" aria-label="PrintSilently — Home">
+                <span class="brand-logo-wrap">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="PrintSilently Logo" width="48" height="48"
+                        fetchpriority="high" />
+                    <span class="brand-logo-glow" aria-hidden="true"></span>
+                </span>
+                <div>
+                    <p class="brand-label">Print Silently</p>
+                    <span class="brand-tag">Seamless eCommerce</span>
+                </div>
+            </a>
 
-      <nav class="nav-links" role="navigation" aria-label="Main navigation">
-        <a href="{{ route('pages.features') }}" @if(request()->routeIs('pages.features')) aria-current="page" @endif>FEATURES</a>
-        <a href="{{ route('pages.pricing') }}" @if(request()->routeIs('pages.pricing')) aria-current="page" @endif>PRICING</a>
-        <a href="{{ route('pages.download') }}" @if(request()->routeIs('pages.download')) aria-current="page" @endif>DOWNLOAD</a>
-        <a href="{{ route('pages.api-docs') }}" @if(request()->routeIs('pages.api-docs')) aria-current="page" @endif>API</a>
-        <a href="{{ route('pages.faq') }}" @if(request()->routeIs('pages.faq')) aria-current="page" @endif>FAQ</a>
-      </nav>
+            <nav class="nav-links" role="navigation" aria-label="Main navigation">
+                <a href="{{ route('pages.features') }}" @if(request()->routeIs('pages.features')) aria-current="page" @endif>Features</a>
+                <a href="{{ route('pages.pricing') }}" @if(request()->routeIs('pages.pricing')) aria-current="page" @endif>Pricing</a>
+                <a href="{{ route('pages.download') }}" @if(request()->routeIs('pages.download')) aria-current="page" @endif>Download</a>
+                <a href="{{ route('pages.api-docs') }}" @if(request()->routeIs('pages.api-docs')) aria-current="page" @endif>API</a>
+                <a href="{{ route('pages.faq') }}" @if(request()->routeIs('pages.faq')) aria-current="page" @endif>FAQ</a>
+            </nav>
 
-      <div class="nav-actions">
-        <a href="{{ route('login') }}" style="color: var(--text); text-decoration: none; font-weight: 500; margin-right: 12px;">Sign in</a>
-        <a class="button primary" href="{{ route('register') }}">Get Started</a>
-        <button class="ghost-btn" id="themeToggle" aria-label="Toggle dark/light theme">Dark</button>
-      </div>
-    </header>
+            <div class="nav-actions">
+                <a href="{{ route('login') }}" class="nav-signin">Sign in</a>
+                <a class="button primary nav-cta" href="{{ route('register') }}">
+                    <span>Get Started</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+                <button class="ghost-btn icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme" aria-pressed="false"></button>
+                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </header>
 
-    {{-- ─── Main Content ────────────────────────────────────────── --}}
-    <main id="main-content" role="main">
-      {{-- Breadcrumbs --}}
-      @if(!empty($seo['breadcrumbs']) && count($seo['breadcrumbs']) > 1)
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <ol itemscope itemtype="https://schema.org/BreadcrumbList">
-            @foreach($seo['breadcrumbs'] as $index => $crumb)
-              <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                @if(!empty($crumb['url']) && !$loop->last)
-                  <a itemprop="item" href="{{ url($crumb['url']) }}">
-                    <span itemprop="name">{{ $crumb['label'] }}</span>
-                  </a>
-                @else
-                  <span itemprop="name" aria-current="page">{{ $crumb['label'] }}</span>
-                @endif
-                <meta itemprop="position" content="{{ $index + 1 }}" />
-              </li>
-            @endforeach
-          </ol>
+        <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-title">Menu</span>
+            </div>
+            <a href="{{ route('pages.features') }}">Features</a>
+            <a href="{{ route('pages.pricing') }}">Pricing</a>
+            <a href="{{ route('pages.download') }}">Download</a>
+            <a href="{{ route('pages.api-docs') }}">API Docs</a>
+            <a href="{{ route('pages.faq') }}">FAQ</a>
+            <a href="{{ route('pages.contact') }}">Contact</a>
+            <div class="mobile-nav-actions">
+                <a href="{{ route('login') }}" class="button secondary">Sign in</a>
+                <a href="{{ route('register') }}" class="button primary">Get Started</a>
+            </div>
         </nav>
-      @endif
 
-      @yield('content')
-    </main>
+        <main id="main-content" role="main">
+            @yield('content')
+        </main>
 
-    {{-- ─── Site Footer ─────────────────────────────────────────── --}}
-    <footer class="footer" role="contentinfo">
-      <div>
-        <p class="footer-title">Print Silently</p>
-        <p>Seamless eCommerce. Effortless Shipping. Background printing for Cloud, ERP, POS, and logistics.</p>
-      </div>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="{{ route('pages.features') }}">Features</a>
-        <a href="{{ route('pages.pricing') }}">Pricing</a>
-        <a href="{{ route('pages.download') }}">Download</a>
-        <a href="{{ route('pages.api-docs') }}">API</a>
-        <a href="{{ route('pages.faq') }}">FAQ</a>
-        <a href="{{ route('pages.contact') }}">Contact</a>
-        <a href="{{ route('pages.about') }}">About</a>
-      </nav>
-      <nav class="footer-links footer-legal" aria-label="Legal links">
-        <a href="{{ route('pages.privacy') }}">Privacy Policy</a>
-        <a href="{{ route('pages.terms') }}">Terms of Service</a>
-      </nav>
-      <p class="footer-copyright">&copy; {{ date('Y') }} PrintSilently. All rights reserved.</p>
-    </footer>
-  </div>
+        <footer class="footer" role="contentinfo">
+            <div class="footer-glow" aria-hidden="true"></div>
 
-  <script>
-    // Theme toggle
-    const toggle = document.getElementById('themeToggle');
-    if (toggle) {
-      toggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('light');
-        toggle.textContent = document.documentElement.classList.contains('light') ? 'Dark' : 'Light';
-      });
-    }
+            <div class="footer-cta animate-on-scroll">
+                <div class="footer-cta-copy">
+                    <span class="eyebrow">Ready to print silently?</span>
+                    <h2>Start free — upgrade when you scale.</h2>
+                    <p>Connect your cloud apps to local printers in minutes. No credit card required.</p>
+                </div>
+                <div class="footer-cta-actions">
+                    <a class="button primary" href="{{ route('register') }}">Create Free Account</a>
+                    <a class="button secondary" href="{{ route('pages.download') }}">Download Agent</a>
+                </div>
+            </div>
 
-    // Topbar scroll effect
-    const topbar = document.querySelector('.topbar');
-    if (topbar) {
-      window.addEventListener('scroll', () => {
-        topbar.classList.toggle('scrolled', window.scrollY > 20);
-      }, { passive: true });
-    }
+            <div class="footer-grid">
+                <div class="footer-brand-col animate-on-scroll">
+                    <p class="footer-title">Print Silently</p>
+                    <p class="footer-desc">Seamless eCommerce. Effortless shipping. Background printing for Cloud, ERP, POS, and logistics.</p>
+                    <div class="footer-social">
+                        <a href="mailto:hello@printsilently.com" aria-label="Email us">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </a>
+                    </div>
+                </div>
 
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { root: null, rootMargin: '0px', threshold: 0.15 });
+                <nav class="footer-col animate-on-scroll delay-100" aria-label="Product links">
+                    <p class="footer-col-title">Product</p>
+                    <a href="{{ route('pages.features') }}">Features</a>
+                    <a href="{{ route('pages.pricing') }}">Pricing</a>
+                    <a href="{{ route('pages.download') }}">Download</a>
+                    <a href="{{ route('pages.api-docs') }}">API Docs</a>
+                </nav>
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-  </script>
+                <nav class="footer-col animate-on-scroll delay-200" aria-label="Company links">
+                    <p class="footer-col-title">Company</p>
+                    <a href="{{ route('pages.about') }}">About</a>
+                    <a href="{{ route('pages.faq') }}">FAQ</a>
+                    <a href="{{ route('pages.contact') }}">Contact</a>
+                </nav>
 
-  @stack('scripts')
+                <nav class="footer-col animate-on-scroll delay-300" aria-label="Legal links">
+                    <p class="footer-col-title">Legal</p>
+                    <a href="{{ route('pages.privacy') }}">Privacy Policy</a>
+                    <a href="{{ route('pages.terms') }}">Terms of Service</a>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">&copy; {{ date('Y') }} PrintSilently. All rights reserved.</p>
+                <p class="footer-tagline">Built for teams who never want to see a print dialog again.</p>
+            </div>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="{{ asset('js/frontend.js') }}" defer></script>
+    @stack('scripts')
 </body>
+
 </html>
