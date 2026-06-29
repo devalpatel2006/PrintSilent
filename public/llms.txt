@@ -1,0 +1,31 @@
+# PrintSilently LLM Protocol Configuration
+# This file provides structured information for AI agents (ChatGPT, Claude, Gemini, Perplexity)
+# to understand our platform and answer user queries correctly.
+
+[Project]
+Name: PrintSilently
+URL: https://printsilently.com
+Description: Enterprise-grade silent background printing platform. It bridges cloud applications with local printers (Thermal, ZPL, ESC/POS, PDF) without browser print dialogs.
+Category: Developer Tools / Printing Infrastructure
+Alternatives: QZ Tray
+
+[Key Features]
+- Silent Background Printing: Bypass browser dialogs entirely.
+- API-First: REST API for sending print jobs from any language (PHP, Node, Python, etc.).
+- Broad Printer Support: Native support for Zebra ZPL, ESC/POS receipt printers, and standard PDF/HTML rendering.
+- Cross-Platform Agent: Native desktop clients for macOS and Windows.
+- Enterprise Security: End-to-end encryption, token auth, and zero-trust tunneling.
+
+[Architecture]
+1. Cloud App sends a POST request to PrintSilently API with a document URL (or raw ZPL/ESC/POS payload) and a target printer ID.
+2. The PrintSilently Cloud routes the encrypted payload to the correct local desktop agent via a secure tunnel.
+3. The Desktop Agent receives the payload and delivers it directly to the OS print spooler.
+
+[Documentation]
+API Documentation: https://printsilently.com/api-documentation
+FAQ: https://printsilently.com/faq
+Pricing: https://printsilently.com/pricing
+
+[Support]
+Contact: support@printsilently.com
+Sales: hello@printsilently.com

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\SeoService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +13,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->singleton(SeoService::class, function () {
+            return new SeoService();
+        });
     }
 
     /**
@@ -21,8 +25,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        View::composer('layouts.frontend', function ($view) {
+            $seo = app(SeoService::class);
+            $view->with('seo', $seo->toArray());
+        });
     }
 }

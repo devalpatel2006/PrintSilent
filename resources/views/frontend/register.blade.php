@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Account — Print Silently</title>
   <meta name="description" content="Sign up for Print Silently and start silent printing in minutes." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="{{ url('/register') }}" />
+  <meta property="og:title" content="Create Account — Print Silently" />
+  <meta property="og:url" content="{{ url('/register') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />

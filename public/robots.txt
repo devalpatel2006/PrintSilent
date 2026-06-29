@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /password/
+
+Allow: /
+
+# Optimization for crawlers
+Crawl-delay: 1
+
+Sitemap: /sitemap.xml

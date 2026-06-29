@@ -10,10 +10,23 @@ use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// ─── Frontend ────────────────────────────────────────────────────────
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
+use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\SitemapController;
+
+// ─── Frontend Static Pages (SEO) ─────────────────────────────────────
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/features', [PageController::class, 'features'])->name('pages.features');
+Route::get('/pricing', [PageController::class, 'pricing'])->name('pages.pricing');
+Route::get('/download', [PageController::class, 'download'])->name('pages.download');
+Route::get('/api-documentation', [PageController::class, 'apiDocs'])->name('pages.api-docs');
+Route::get('/faq', [PageController::class, 'faq'])->name('pages.faq');
+Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('pages.privacy');
+Route::get('/terms-of-service', [PageController::class, 'terms'])->name('pages.terms');
+Route::get('/about', [PageController::class, 'about'])->name('pages.about');
+
+// ─── XML Sitemap ─────────────────────────────────────────────────────
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 // Frontend Auth (register + login)
 Route::get('/register', [FrontendAuthController::class, 'showRegister'])->name('register');
@@ -47,5 +60,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // New Resource Routes
         Route::resource('organizations', AdminOrganizationController::class);
         Route::resource('api-keys', AdminApiKeyController::class);
+
+        // Visitor Tracking
+        Route::get('/visitors', [\App\Http\Controllers\Admin\AdminVisitorController::class, 'index'])->name('visitors.index');
+        Route::delete('/visitors/delete-all', [\App\Http\Controllers\Admin\AdminVisitorController::class, 'deleteAll'])->name('visitors.delete_all');
     });
 });
