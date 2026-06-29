@@ -47,6 +47,7 @@
         </a>
         @endif
 
+        @if(auth()->user()->is_admin)
         <a href="{{ route('admin.contacts.index') }}"
             class="nav-item {{ request()->routeIs('admin.contacts.*') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -55,6 +56,7 @@
             </svg>
             Contact Messages
         </a>
+        @endif
 
         <a href="{{ route('admin.profile.edit') }}"
             class="nav-item {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}">
