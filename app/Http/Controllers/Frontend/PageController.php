@@ -25,7 +25,8 @@ class PageController extends Controller
     public function home()
     {
         $this->seo
-            ->setTitle('')  // Empty = uses default "PrintSilently — Silent Printing for Modern Businesses"
+            ->setTitle('Print Silently for Modern Businesses')  // Empty = uses default "Print Silently for Modern Businesses"
+
             ->setDescription('PrintSilently connects cloud apps to local printers with secure silent background printing. The best QZ Tray alternative for thermal labels, ZPL, ESC/POS, and browser-based printing.')
             ->setKeywords(['silent printing', 'QZ Tray alternative', 'browser printing', 'thermal label printing', 'cloud printing'])
             ->setBreadcrumbs([

@@ -36,7 +36,7 @@
 
     <div class="page-shell">
         <header class="topbar" role="banner">
-            <a href="{{ route('home') }}" class="brand" aria-label="PrintSilently — Home">
+            <a href="{{ route('home') }}" class="brand" aria-label="Print Silently for Modern Businesses — Home">
                 <span class="brand-logo-wrap">
                     <img src="{{ asset('images/logo.jpg') }}" alt="PrintSilently Logo" width="48" height="48"
                         fetchpriority="high" />
@@ -49,21 +49,31 @@
             </a>
 
             <nav class="nav-links" role="navigation" aria-label="Main navigation">
-                <a href="{{ route('pages.features') }}" @if(request()->routeIs('pages.features')) aria-current="page" @endif>Features</a>
-                <a href="{{ route('pages.pricing') }}" @if(request()->routeIs('pages.pricing')) aria-current="page" @endif>Pricing</a>
-                <a href="{{ route('pages.download') }}" @if(request()->routeIs('pages.download')) aria-current="page" @endif>Download</a>
-                <a href="{{ route('pages.api-docs') }}" @if(request()->routeIs('pages.api-docs')) aria-current="page" @endif>API</a>
-                <a href="{{ route('pages.faq') }}" @if(request()->routeIs('pages.faq')) aria-current="page" @endif>FAQ</a>
+                <a href="{{ route('pages.features') }}" @if(request()->routeIs('pages.features')) aria-current="page"
+                    @endif>Features</a>
+                <a href="{{ route('pages.pricing') }}" @if(request()->routeIs('pages.pricing')) aria-current="page"
+                    @endif>Pricing</a>
+                <a href="{{ route('pages.download') }}" @if(request()->routeIs('pages.download')) aria-current="page"
+                    @endif>Download</a>
+                <a href="{{ route('pages.api-docs') }}" @if(request()->routeIs('pages.api-docs')) aria-current="page"
+                    @endif>API</a>
+                <a href="{{ route('pages.faq') }}" @if(request()->routeIs('pages.faq')) aria-current="page"
+                    @endif>FAQ</a>
             </nav>
 
             <div class="nav-actions">
                 <a href="{{ route('login') }}" class="nav-signin">Sign in</a>
                 <a class="button primary nav-cta" href="{{ route('register') }}">
                     <span>Get Started</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
                 </a>
-                <button class="ghost-btn icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme" aria-pressed="false"></button>
-                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                <button class="ghost-btn icon-btn" id="themeToggle" type="button" aria-label="Toggle dark/light theme"
+                    aria-pressed="false"></button>
+                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+                    aria-controls="mobileNav">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -108,10 +118,15 @@
             <div class="footer-grid">
                 <div class="footer-brand-col animate-on-scroll">
                     <p class="footer-title">Print Silently</p>
-                    <p class="footer-desc">Seamless eCommerce. Effortless shipping. Background printing for Cloud, ERP, POS, and logistics.</p>
+                    <p class="footer-desc">Seamless eCommerce. Effortless shipping. Background printing for Cloud, ERP,
+                        POS, and logistics.</p>
                     <div class="footer-social">
                         <a href="mailto:hello@printsilently.com" aria-label="Email us">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -146,7 +161,9 @@
     </div>
 
     <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
     </button>
 
     <script src="{{ asset('js/frontend.js') }}" defer></script>
